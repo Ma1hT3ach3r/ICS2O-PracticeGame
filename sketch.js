@@ -1,4 +1,5 @@
 var person;
+var sceneNum=0;
 
 function setup() {
   createCanvas(640, 360);
@@ -9,12 +10,27 @@ function keyPressed(){
   if (key == ' '){
     var jump = createVector(0,-5);
     person.applyForce(jump);
+    person.count();
+  } else if (key=='q'){
+    sceneNum++;
   }
 }
 
 function draw() {
-  background(51);
-  translate(-person.pos.x,0);
+  
+  if(sceneNum===0){
+    background(50,50,50);
+    textSize(30);
+    fill(50,200,30);
+    
+    text("2D Side Scroller",100,100);
+    fill(200,200,200);
+    textSize(20);
+    text("press q to play", 100,200);
+    
+  }else if(sceneNum===1){
+  background(51,100,100);
+  translate(-person.pos.x+100,0);
   var gravity = createVector(0,0.1);
   person.applyForce(gravity);
   if(mouseIsPressed){
@@ -27,5 +43,12 @@ function draw() {
   person.edges();
     person.display();
   fill(255,0,100);
-  rect(400, height-50,50,50);
+  rect(400, height-150,50,50);
+  }else{
+    background(15,100,2);
+    fill(130,1,13);
+    textSize(50);
+    strokeWeight(50);
+    text("That is all folks!",50,200);
+  }
 }
